@@ -9,11 +9,11 @@ class CalendarHeader extends Component {
     calendarHeaderFormat: PropTypes.string.isRequired,
     calendarHeaderContainerStyle: PropTypes.oneOfType([
       PropTypes.object,
-      PropTypes.number
+      PropTypes.number,
     ]),
     calendarHeaderStyle: PropTypes.oneOfType([
       PropTypes.object,
-      PropTypes.number
+      PropTypes.number,
     ]),
     weekStartDate: PropTypes.object,
     weekEndDate: PropTypes.object,
@@ -52,19 +52,28 @@ class CalendarHeader extends Component {
       }
     }
 
+    // if (firstDay.month() === lastDay.month()) {
+    //   return firstDay.format(calendarHeaderFormat);
+    // } else if (firstDay.year() !== lastDay.year()) {
+    //   return `${firstDay.format(calendarHeaderFormat)} / ${lastDay.format(
+    //     calendarHeaderFormat
+    //   )}`;
+    // }
+
+    // return `${
+    //   monthFormatting.length > 1 ? firstDay.format(monthFormatting) : ""
+    // } ${monthFormatting.length > 1 ? "/" : ""} ${lastDay.format(
+    //   calendarHeaderFormat
+    // )}`;
     if (firstDay.month() === lastDay.month()) {
       return firstDay.format(calendarHeaderFormat);
     } else if (firstDay.year() !== lastDay.year()) {
-      return `${firstDay.format(calendarHeaderFormat)} / ${lastDay.format(
-        calendarHeaderFormat
-      )}`;
+      return `${firstDay.format(calendarHeaderFormat)}`;
     }
 
     return `${
-      monthFormatting.length > 1 ? firstDay.format(monthFormatting) : ""
-    } ${monthFormatting.length > 1 ? "/" : ""} ${lastDay.format(
-      calendarHeaderFormat
-    )}`;
+      monthFormatting.length > 1 ? firstDay.format(calendarHeaderFormat) : ""
+    }`;
   }
 
   render() {
@@ -79,13 +88,17 @@ class CalendarHeader extends Component {
       weekEndDate: _weekEndDate,
       headerText,
     } = this.props;
-    const _headerText = headerText || this.formatCalendarHeader(calendarHeaderFormat);
+    const _headerText =
+      headerText || this.formatCalendarHeader(calendarHeaderFormat);
     const weekStartDate = _weekStartDate && _weekStartDate.clone();
     const weekEndDate = _weekEndDate && _weekEndDate.clone();
 
     return (
       <TouchableOpacity
-        onPress={onHeaderSelected && onHeaderSelected.bind(this, {weekStartDate, weekEndDate})}
+        onPress={
+          onHeaderSelected &&
+          onHeaderSelected.bind(this, { weekStartDate, weekEndDate })
+        }
         disabled={!onHeaderSelected}
         style={calendarHeaderContainerStyle}
       >
@@ -93,7 +106,7 @@ class CalendarHeader extends Component {
           style={[
             styles.calendarHeader,
             { fontSize: fontSize },
-            calendarHeaderStyle
+            calendarHeaderStyle,
           ]}
           allowFontScaling={allowHeaderTextScaling}
         >
