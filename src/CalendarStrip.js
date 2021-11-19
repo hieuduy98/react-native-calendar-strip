@@ -42,6 +42,7 @@ class CalendarStrip extends Component {
     datesWhitelist: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
     datesBlacklist: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
     headerText: PropTypes.string,
+    disableDateSelected: PropTypes.bool,
 
     markedDates: PropTypes.oneOfType([PropTypes.array, PropTypes.func]),
     scrollToOnSetSelectedDate: PropTypes.bool,
@@ -297,6 +298,9 @@ class CalendarStrip extends Component {
 
   //Handling press on date/selecting date
   onDateSelected = selectedDate => {
+    if(this.props.disableDateSelected){
+      return;
+    }
     let newState;
     if (this.props.scrollable) {
       newState = { selectedDate };

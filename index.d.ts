@@ -71,6 +71,7 @@ interface CalendarStripProps {
   style: StyleProp<ViewStyle>;
   innerStyle?: StyleProp<ViewStyle>;
   calendarColor?: string;
+  disableDateSelected?: boolean;
 
   numDaysInWeek?: number;
   scrollable?: boolean;
